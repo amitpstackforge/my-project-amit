@@ -1,18 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
-import { LoginForm } from './login-form/login-form';
-import { ProfileCard } from './profile-card/profile-card';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-login-form',
   standalone: true,
-  imports: [FormsModule, RouterOutlet, CommonModule, ProfileCard],
-  templateUrl: './app.html',
-  styleUrls: ['./app.css']
+  imports: [CommonModule, FormsModule],
+  templateUrl: './login-form.html',
+  styleUrls: ['./login-form.css']
 })
-export class App {
+export class LoginForm {
   email = '';
   password = '';
   address = '';
@@ -20,10 +17,11 @@ export class App {
   fathersName = '';
   mothersName = '';
   brothersName = '';
-  "occupation" = '';
-  "sex" = '';
-  "pinCode" = '';
-  "stdCode" = '';
+  occupation = '';
+  sex = '';
+  pinCode = '';
+  stdCode = '';
+
   onSubmit(form: any) {
     if (form.valid) {
       alert(`Login Successful!\nEmail: ${this.email}`);
@@ -31,6 +29,7 @@ export class App {
     } else {
       alert('Please fill all fields correctly.');
     }
-
   }
+
+
 }
