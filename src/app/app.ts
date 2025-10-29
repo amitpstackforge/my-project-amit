@@ -1,36 +1,14 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
-import { LoginForm } from './login-form/login-form';
-import { ProfileCard } from './profile-card/profile-card';
+import { RouterOutlet, RouterModule } from '@angular/router';
+import { routes } from './app.routes';
+import { CommonModule } from '@angular/common';
+import { Navbar } from './shared/navbar/navbar';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, RouterOutlet, CommonModule, ProfileCard],
+  imports: [RouterOutlet, CommonModule, Navbar],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
-export class App {
-  email = '';
-  password = '';
-  address = '';
-  remember = false;
-  fathersName = '';
-  mothersName = '';
-  brothersName = '';
-  "occupation" = '';
-  "sex" = '';
-  "pinCode" = '';
-  "stdCode" = '';
-  onSubmit(form: any) {
-    if (form.valid) {
-      alert(`Login Successful!\nEmail: ${this.email}`);
-      console.log(form.value);
-    } else {
-      alert('Please fill all fields correctly.');
-    }
-
-  }
-}
+export class App { }

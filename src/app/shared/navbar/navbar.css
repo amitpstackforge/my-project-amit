@@ -1,0 +1,9 @@
+nav a {
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+nav a:hover {
+    color: #ffd700;
+    /* gold */
+}
