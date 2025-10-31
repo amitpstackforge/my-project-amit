@@ -1,0 +1,82 @@
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-tabs',
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  templateUrl: './tabs-component.html',
+  styleUrl: './tabs-component.css',
+})
+export class TabsComponent {
+
+  selectedTab: string = 'Today';
+  showModal = false;
+
+  // ✅ সব টাস্ক এখানে জমা হবে
+  tasks: any[] = [];
+
+  // ট্যাব লিস্ট
+  tabs = ['Today', 'Pending', 'Overdue'];
+
+  // ✅ Reactive Form
+  productForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.productForm = this.fb.group({
+      name: ['', Validators.required],
+      price: [null, [Validators.required, Validators.min(1)]],
+      category: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+  }
+
+  // ✅ ট্যাব সিলেক্ট ফাংশন
+  selectTab(tabOrEvent: string | Event) {
+    if (typeof tabOrEvent === 'string') {
+      this.selectedTab = tabOrEvent;
+    } else {
+      const selectElement = tabOrEvent.target as HTMLSelectElement;
+      this.selectedTab = selectElement.value;
+    }
+  }
+
+  // ✅ মডাল টগল
+  toggleModal(): void {
+    this.showModal = !this.showModal;
+  }
+
+  // ✅ ফর্ম সাবমিট হ্যান্ডলার
+  onSubmit(): void {
+    if (this.productForm.invalid) {
+      this.productForm.markAllAsTouched();
+      return;
+    }
+
+    // নতুন টাস্ক তৈরি
+    const newTask = {
+      id: Date.now(), // ইউনিক আইডি
+      name: this.productForm.value.name,
+      price: this.productForm.value.price,
+      category: this.productForm.value.category,
+      description: this.productForm.value.description,
+      date: new Date().toDateString() // আজকের তারিখ
+    };
+
+    // ✅ টাস্ক লিস্টে যোগ করা
+    this.tasks.push(newTask);
+
+    console.log('✅ নতুন টাস্ক যোগ হয়েছে:', newTask);
+
+    // ✅ মেসেজ ও ক্লিন আপ
+    alert('✅ নতুন টাস্ক সফলভাবে যোগ হয়েছে!');
+    this.productForm.reset();
+    this.toggleModal();
+  }
+
+  // ✅ ফর্ম কন্ট্রোল getter
+  get f() {
+    return this.productForm.controls;
+  }
+}
