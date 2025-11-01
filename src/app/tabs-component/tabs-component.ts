@@ -17,6 +17,9 @@ export class TabsComponent {
   // ✅ সব টাস্ক এখানে জমা হবে
   tasks: any[] = [];
 
+  isEditMode = false;
+  editIndex: number | null = null;
+
   // ট্যাব লিস্ট
   tabs = ['Today', 'Pending', 'Overdue'];
 
@@ -42,16 +45,40 @@ export class TabsComponent {
     }
   }
 
-  // ✅ মডাল টগল
   toggleModal(): void {
-    this.showModal = !this.showModal;
+    this.showModal = !this.showModal; // <-- এই লাইনটি নেই
+    if (!this.showModal) {
+      this.productForm.reset();
+      this.isEditMode = false;
+      this.editIndex = null;
+    }
   }
+
 
   // ✅ ফর্ম সাবমিট হ্যান্ডলার
   onSubmit(): void {
+
+    console.log('Form submitted once ✅');
+
     if (this.productForm.invalid) {
       this.productForm.markAllAsTouched();
       return;
+    }
+
+    if (this.isEditMode && this.editIndex !== null) {
+      this.tasks[this.editIndex] = {
+        ...this.tasks[this.editIndex],
+        ...this.productForm.value
+      };
+      // alert('✅ টাস্ক সফলভাবে আপডেট হয়েছে!');
+    } else {
+      const newTask = {
+        id: Date.now(),
+        ...this.productForm.value,
+        date: new Date().toDateString()
+      };
+
+      // alert('✅ নতুন টাস্ক যোগ হয়েছে!');
     }
 
     // নতুন টাস্ক তৈরি
@@ -70,9 +97,24 @@ export class TabsComponent {
     console.log('✅ নতুন টাস্ক যোগ হয়েছে:', newTask);
 
     // ✅ মেসেজ ও ক্লিন আপ
-    alert('✅ নতুন টাস্ক সফলভাবে যোগ হয়েছে!');
+    // alert('✅ নতুন টাস্ক সফলভাবে যোগ হয়েছে!');
     this.productForm.reset();
     this.toggleModal();
+  }
+
+  onEditTask(index: number): void {
+    const task = this.tasks[index];
+    if (task) {
+      this.productForm.patchValue({
+        name: task.name,
+        price: task.price,
+        category: task.category,
+        description: task.description
+      });
+      this.isEditMode = true;
+      this.editIndex = index;
+      this.showModal = true;
+    }
   }
 
   // ✅ ফর্ম কন্ট্রোল getter

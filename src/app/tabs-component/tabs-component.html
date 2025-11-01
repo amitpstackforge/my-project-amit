@@ -49,7 +49,7 @@
 <!-- Tab Content -->
 <div class="p-4 mt-4 border rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
     <div *ngIf="selectedTab === 'Today'">
-        <div *ngFor="let task of tasks" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
+        <div *ngFor="let task of tasks; let i = index" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
          border-b border-gray-200 rounded-t-lg hover:bg-gray-100 hover:text-blue-700 
          dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white 
          dark:focus:ring-gray-500 dark:focus:text-white">
@@ -68,7 +68,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M12 8v4l2 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                {{ task.date }}
+                 {{i}} -- {{ task.date }}
             </div>
 
             <!-- ✅ Right: Edit Button -->
@@ -76,7 +76,7 @@
            focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 
            font-medium rounded-full text-sm px-4 py-2 
            dark:bg-gray-800 dark:text-white dark:border-gray-600 
-           dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" (click)="toggleModal()">
+           dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" (click)="onEditTask(i)">
                 ✏️
             </button>
         </div>
@@ -203,7 +203,8 @@
 
                     <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none 
           focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                        ➕ Add new product
+
+                        {{ isEditMode ? '✏️ Save Changes' : '➕ Add new product' }}
                     </button>
                 </form>
             </div>
