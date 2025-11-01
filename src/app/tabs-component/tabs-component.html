@@ -68,17 +68,30 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M12 8v4l2 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                 {{i}} -- {{ task.date }}
+                {{ task.date }}
             </div>
 
-            <!-- ✅ Right: Edit Button -->
-            <button type="button" class="flex items-center justify-center text-gray-900 bg-white border border-gray-300 
+            <!-- Right: Actions (Edit + Delete) -->
+            <div class="flex gap-2">
+                <!-- ✅ Right: Edit Button -->
+                <button type="button" class="flex items-center justify-center text-gray-900 bg-white border border-gray-300 
            focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 
            font-medium rounded-full text-sm px-4 py-2 
            dark:bg-gray-800 dark:text-white dark:border-gray-600 
            dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" (click)="onEditTask(i)">
-                ✏️
-            </button>
+                    ✏️
+                </button>
+
+
+                <button type="button" class="flex items-center justify-center text-gray-900 bg-white border border-gray-300 
+                       focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 
+                       font-medium rounded-full text-sm px-4 py-2 
+                       dark:bg-gray-800 dark:text-white dark:border-gray-600 
+                       dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                    (click)="onDeleteTask(i)">
+                    🗑️
+                </button>
+            </div>
         </div>
 
 
@@ -199,6 +212,13 @@
                                 ⚠️ Description is required
                             </p>
                         </div>
+
+
+                        <div class="col-span-2">
+                            <label class="block mb-2 text-sm font-medium text-gray-900">Date</label>
+                            <input formControlName="date" type="date" class="w-full p-2.5 border rounded-lg" />
+                        </div>
+
                     </div>
 
                     <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none 
@@ -206,6 +226,7 @@
 
                         {{ isEditMode ? '✏️ Save Changes' : '➕ Add new product' }}
                     </button>
+
                 </form>
             </div>
         </div>
