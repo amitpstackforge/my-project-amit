@@ -48,190 +48,125 @@
 
 <!-- Tab Content -->
 <div class="p-4 mt-4 border rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
-    <div *ngIf="selectedTab === 'Today'">
-        <div *ngFor="let task of tasks; let i = index" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
+
+    <!-- ✅ Common filtered task list -->
+    <ng-container *ngIf="filteredTasks.length > 0; else noTaskFound">
+        <div *ngIf="selectedTab === 'Today'">
+            <div *ngFor="let task of filteredTasks; let i = index" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
          border-b border-gray-200 rounded-t-lg hover:bg-gray-100 hover:text-blue-700 
          dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white 
          dark:focus:ring-gray-500 dark:focus:text-white">
 
-            <!-- ✅ Left section -->
-            <div class="flex items-center gap-5">
-                <input type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm 
-               focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 
-               focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <p class="text-sm text-gray-700 dark:text-gray-200 font-medium">{{ task.name }}</p>
-            </div>
-
-            <!-- ✅ Middle: Date -->
-            <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 8v4l2 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {{ task.date }}
-            </div>
-
-            <!-- Right: Actions (Edit + Delete) -->
-            <div class="flex gap-2">
-                <!-- ✅ Right: Edit Button -->
-                <button type="button" class="flex items-center justify-center text-gray-900 bg-white border border-gray-300 
-           focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 
-           font-medium rounded-full text-sm px-4 py-2 
-           dark:bg-gray-800 dark:text-white dark:border-gray-600 
-           dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" (click)="onEditTask(i)">
-                    ✏️
-                </button>
-
-
-                <button type="button" class="flex items-center justify-center text-gray-900 bg-white border border-gray-300 
-                       focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 
-                       font-medium rounded-full text-sm px-4 py-2 
-                       dark:bg-gray-800 dark:text-white dark:border-gray-600 
-                       dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                    (click)="onDeleteTask(i)">
-                    🗑️
-                </button>
-            </div>
-        </div>
-
-
-
-    </div>
-    <div *ngIf="selectedTab === 'Pending'">
-        <h2 class="text-lg font-semibold mb-2">Pending</h2>
-        <p>This is the Pending tab content.</p>
-    </div>
-    <div *ngIf="selectedTab === 'Overdue'">
-        <h2 class="text-lg font-semibold mb-2">Overdue</h2>
-        <p>This is the Overdue tab content.</p>
-    </div>
-
-    <nav aria-label="Page navigation example ">
-        <ul class="inline-flex -space-x-px text-base h-10 mt-6
-">
-            <li>
-                <a href="#"
-                    class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-            </li>
-            <li>
-                <a href="#" aria-current="page"
-                    class="flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- Modal toggle -->
-
-    <!-- Toggle Modal Button -->
-    <button (click)="toggleModal()" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none 
-  focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-        Toggle modal
-    </button>
-
-    <!-- Modal (Angular-controlled) -->
-    <div *ngIf="showModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-
-        <div class="relative p-4 w-full max-w-md max-h-full">
-            <div class="relative bg-white rounded-lg shadow-sm">
-                <!-- Header -->
-                <div class="flex items-center justify-between p-4 border-b border-gray-200">
-                    <h3 class="text-lg font-semibold text-gray-900">
-                        Create New Product
-                    </h3>
-                    <button type="button" (click)="toggleModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm 
-          w-8 h-8 flex justify-center items-center">
-                        ✖
-                    </button>
+                <!-- Left -->
+                <div class="flex items-center gap-5">
+                    <input type="checkbox" [(ngModel)]="task.completed" (change)="toggleComplete(task)"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500" />
+                    <p class="text-sm text-gray-700 dark:text-gray-200 font-medium"
+                        [ngClass]="{'line-through text-gray-400': task.completed}">
+                        {{ task.name }}
+                    </p>
                 </div>
 
-                <!-- Form -->
-                <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="p-4">
-                    <div class="grid gap-4 mb-4 grid-cols-2">
-                        <!-- Name -->
-                        <div class="col-span-2">
-                            <label class="block mb-2 text-sm font-medium text-gray-900">Name</label>
-                            <input formControlName="name" type="text" placeholder="Type product name"
-                                class="w-full p-2.5 border rounded-lg" />
-                            <p *ngIf="f['name'].touched && f['name'].invalid" class="text-red-500 text-sm">⚠️ Name is
-                                required</p>
-                        </div>
+                <!-- Date -->
+                <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
+                    📅 {{ task.date }}
+                </div>
 
-                        <!-- Price -->
-                        <div class="col-span-2 sm:col-span-1">
-                            <label class="block mb-2 text-sm font-medium text-gray-900">Price</label>
-                            <input formControlName="price" type="number" placeholder="$2999"
-                                class="w-full p-2.5 border rounded-lg" />
-                            <p *ngIf="f['price'].touched && f['price'].invalid" class="text-red-500 text-sm">
-                                ⚠️ Enter a valid price
-                            </p>
-                        </div>
-
-                        <!-- Category -->
-                        <div class="col-span-2 sm:col-span-1">
-                            <label class="block mb-2 text-sm font-medium text-gray-900">Category</label>
-                            <select formControlName="category" class="w-full p-2.5 border rounded-lg">
-                                <option value="">Select category</option>
-                                <option value="TV">TV/Monitors</option>
-                                <option value="PC">PC</option>
-                                <option value="GA">Gaming/Console</option>
-                                <option value="PH">Phones</option>
-                            </select>
-                            <p *ngIf="f['category'].touched && f['category'].invalid" class="text-red-500 text-sm">
-                                ⚠️ Select a category
-                            </p>
-                        </div>
-
-                        <!-- Description -->
-                        <div class="col-span-2">
-                            <label class="block mb-2 text-sm font-medium text-gray-900">Product Description</label>
-                            <textarea formControlName="description" rows="4"
-                                placeholder="Write product description here"
-                                class="w-full p-2.5 border rounded-lg"></textarea>
-                            <p *ngIf="f['description'].touched && f['description'].invalid"
-                                class="text-red-500 text-sm">
-                                ⚠️ Description is required
-                            </p>
-                        </div>
+                <!-- Actions -->
+                <div class="flex gap-2">
 
 
-                        <div class="col-span-2">
-                            <label class="block mb-2 text-sm font-medium text-gray-900">Date</label>
-                            <input formControlName="date" type="date" class="w-full p-2.5 border rounded-lg" />
-                        </div>
-
-                    </div>
-
-                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none 
-          focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-
-                        {{ isEditMode ? '✏️ Save Changes' : '➕ Add new product' }}
-                    </button>
-
-                </form>
+                    <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
+                    <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
+                </div>
             </div>
         </div>
+
+        <!-- 🟡 Pending Tab -->
+        <div *ngIf="selectedTab === 'Pending'">
+            <div *ngFor="let task of filteredTasks; let i = index" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
+                     border-b border-gray-200 hover:bg-gray-100 dark:border-gray-600">
+                <div class="flex flex-col">
+                    <p class="font-semibold text-yellow-700 dark:text-yellow-400">{{ task.name }}</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ task.date }}</p>
+                </div>
+                <div class="flex gap-2">
+                    <!-- ✅ Mark as Completed -->
+                    <button (click)="toggleComplete(task)"
+                        class="px-3 py-1 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700">
+                        ✅ Complete
+                    </button>
+                    <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
+                    <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 🔴 Overdue Tab -->
+        <div *ngIf="selectedTab === 'Overdue'">
+            <div *ngFor="let task of filteredTasks; let i = index" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
+                     border-b border-gray-200 hover:bg-gray-100 dark:border-gray-600">
+                <div class="flex flex-col">
+                    <p class="font-semibold text-red-700 dark:text-red-400">{{ task.name }}</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ task.date }}</p>
+                </div>
+                <div class="flex gap-2">
+                    <!-- ✅ Mark as Completed -->
+                    <button (click)="toggleComplete(task)"
+                        class="px-3 py-1 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700">
+                        ✅ Complete
+                    </button>
+                    <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
+                    <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
+                </div>
+            </div>
+        </div>
+
+        <!--  Completed Tab -->
+        <div *ngIf="selectedTab === 'Completed'">
+            <div *ngFor="let task of filteredTasks; let i = index" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
+                                     border-b border-gray-200 hover:bg-gray-100 dark:border-gray-600">
+                <div class="flex flex-col">
+                    <p class="font-semibold text-red-700 dark:text-red-400">{{ task.name }}</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ task.date }}</p>
+                </div>
+                <div class="flex gap-2">
+                    <!-- ↩️ Undo button -->
+                    <button (click)="toggleComplete(task)"
+                        class="px-3 py-1 text-sm bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-all">
+                        ↩️ Undo
+                    </button>
+                    <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
+                    <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
+                </div>
+            </div>
+        </div>
+        <!-- Pagination (optional, same as before) -->
+        <nav aria-label="Page navigation example" class="mt-6">
+            <ul class="inline-flex -space-x-px text-base h-10">
+                <li><a href="#" class="page-btn">Previous</a></li>
+                <li><a href="#" class="page-btn">1</a></li>
+                <li><a href="#" class="page-btn">2</a></li>
+                <li><a href="#" class="page-btn active">3</a></li>
+                <li><a href="#" class="page-btn">Next</a></li>
+            </ul>
+        </nav>
+
+
+    </ng-container>
+
+
+    <!-- ✅ No task fallback -->
+    <ng-template #noTaskFound>
+        <p class="text-center text-gray-500 dark:text-gray-400 py-6">
+            ⚠️ No {{ selectedTab }} tasks found.
+        </p>
+    </ng-template>
+
+
+    <!-- ✅ Toast Notification -->
+    <div *ngIf="showToast" class="fixed bottom-5 right-5 bg-green-600 text-white text-sm px-5 py-3 rounded-lg shadow-lg 
+             animate-fade-in-out">
+        {{ toastMessage }}
     </div>
-
-
-
-</div>
