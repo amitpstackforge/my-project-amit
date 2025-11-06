@@ -65,6 +65,10 @@ export class TabsComponent {
   toastMessage: string = '';
   showToast: boolean = false;
 
+  searchText: string = "";   // ✅ SEARCH TEXT VARIABLE ADDED
+
+
+
   constructor(private fb: FormBuilder) {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
@@ -213,23 +217,28 @@ export class TabsComponent {
   updateFilteredTasks() {
     const today = new Date().toDateString();
 
+    let tasksBasedOnTab = [];
+
     if (this.selectedTab === 'Today') {
-      this.filteredTasks = this.tasks.filter(
+      tasksBasedOnTab = this.tasks.filter(
         t => new Date(t.date).toDateString() === today && !t.completed
       );
     } else if (this.selectedTab === 'Pending') {
-      this.filteredTasks = this.tasks.filter(
+      tasksBasedOnTab = this.tasks.filter(
         t => new Date(t.date) > new Date() && !t.completed
       );
     } else if (this.selectedTab === 'Overdue') {
-      this.filteredTasks = this.tasks.filter(
+      tasksBasedOnTab = this.tasks.filter(
         t => new Date(t.date) < new Date() && !t.completed
       );
     } else if (this.selectedTab === 'Completed') {
-      this.filteredTasks = this.tasks.filter(
+      tasksBasedOnTab = this.tasks.filter(
         t => t.completed
       );
     }
+
+    // ✅ Apply Search Filter
+    this.filteredTasks = this.filterTasksBySearch(tasksBasedOnTab);
   }
 
   showToastMessage(message: string) {
@@ -275,4 +284,26 @@ export class TabsComponent {
     // Refresh filtered tasks after toast
     this.updateFilteredTasks();
   }
+
+  // ✅ Filter by Search text
+  filterTasksBySearch(tasksBasedOnTab: any[]): any[] {
+    if (!this.searchText.trim()) return tasksBasedOnTab;
+
+    const search = this.searchText.toLowerCase();
+
+    return tasksBasedOnTab.filter(task =>
+      task.name.toLowerCase().includes(search) ||
+      task.category.toLowerCase().includes(search) ||
+      task.description.toLowerCase().includes(search)
+    );
+  }
+
+  // ✅ Input change হলে auto filtering
+  onSearchChange() {
+    this.updateFilteredTasks();
+
+  }
+
+
+
 }
