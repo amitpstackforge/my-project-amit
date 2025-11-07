@@ -55,7 +55,16 @@
         </svg>Search
     </button>
 </form>
-
+<!-- ✅ Priority Filter Dropdown -->
+<div class="flex justify-end mb-3">
+    <select [(ngModel)]="priorityFilter" (change)="updateFilteredTasks()"
+        class="border px-3 py-2 rounded-lg text-sm focus:ring focus:ring-green-300">
+        <option value="All">🎯 All Priorities</option>
+        <option value="High">🔴 High</option>
+        <option value="Medium">🟡 Medium</option>
+        <option value="Low">🟢 Low</option>
+    </select>
+</div>
 
 <div class="flex items-center justify-between mt-4 mb-0">
     <p class="text-xl text-gray-900 dark:text-white">Tasks</p>
@@ -117,9 +126,18 @@
         <div *ngIf="selectedTab === 'Pending'">
             <div *ngFor="let task of filteredTasks; let i = index" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
                      border-b border-gray-200 hover:bg-gray-100 dark:border-gray-600">
-                <div class="flex flex-col">
-                    <p class="font-semibold text-yellow-700 dark:text-yellow-400">{{ task.name }}</p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ task.date }}</p>
+                <div class="flex items-center gap-4">
+
+
+                    <p class="font-semibold text-red-700 dark:text-red-400">{{ task.name }}</p>
+                    <span [ngClass]="getPriorityClass(task.priority)" class="text-xs px-2 py-1 rounded w-fit ">
+                        {{ task.priority }}
+                    </span>
+ 
+                </div>
+                <!-- Date -->
+                <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
+                    📅 {{ task.date }}
                 </div>
                 <div class="flex gap-2">
                     <!-- ✅ Mark as Completed -->
@@ -138,9 +156,18 @@
         <div *ngIf="selectedTab === 'Overdue'">
             <div *ngFor="let task of filteredTasks; let i = index" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
                      border-b border-gray-200 hover:bg-gray-100 dark:border-gray-600">
-                <div class="flex flex-col">
+                <div class="flex items-center gap-4">
+
+
                     <p class="font-semibold text-red-700 dark:text-red-400">{{ task.name }}</p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ task.date }}</p>
+                    <span [ngClass]="getPriorityClass(task.priority)" class="text-xs px-2 py-1 rounded w-fit ">
+                        {{ task.priority }}
+                    </span>
+ 
+                </div>
+                <!-- Date -->
+                <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
+                    📅 {{ task.date }}
                 </div>
                 <div class="flex gap-2">
                     <!-- ✅ Mark as Completed -->
@@ -158,9 +185,18 @@
         <div *ngIf="selectedTab === 'Completed'">
             <div *ngFor="let task of filteredTasks; let i = index" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
                                      border-b border-gray-200 hover:bg-gray-100 dark:border-gray-600">
-                <div class="flex flex-col">
+                <div class="flex items-center gap-4">
+
+
                     <p class="font-semibold text-red-700 dark:text-red-400">{{ task.name }}</p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ task.date }}</p>
+                    <span [ngClass]="getPriorityClass(task.priority)" class="text-xs px-2 py-1 rounded w-fit ">
+                        {{ task.priority }}
+                    </span>
+ 
+                </div>
+                <!-- Date -->
+                <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
+                    📅 {{ task.date }}
                 </div>
                 <div class="flex gap-2">
                     <!-- ↩️ Undo button -->
@@ -170,6 +206,7 @@
                     </button>
                     <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
                     <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
+
                 </div>
             </div>
         </div>
