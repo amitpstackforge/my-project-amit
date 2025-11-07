@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Component, PendingTasks } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { dateTimestampProvider } from 'rxjs/internal/scheduler/dateTimestampProvider';
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-tabs',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, DragDropModule],
   templateUrl: './tabs-component.html',
   styleUrl: './tabs-component.css',
 })
@@ -15,6 +16,10 @@ export class TabsComponent {
   selectedTab: string = 'Today';
   showModal = false;
   priorityFilter: string = "All";
+
+  drop(event: CdkDragDrop<any[]>) {
+    moveItemInArray(this.filteredTasks, event.previousIndex, event.currentIndex);
+  }
 
   // ✅ সব টাস্ক এখানে জমা হবে
   // ✅ All task list

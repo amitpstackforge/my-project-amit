@@ -60,10 +60,7 @@
         Filter by Priority
     </label>
 
-    <select id="priority" 
-    [(ngModel)]="priorityFilter" 
-    (change)="updateFilteredTasks()" 
-    name="priorityFilter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+    <select id="priority" [(ngModel)]="priorityFilter" (change)="updateFilteredTasks()" name="priorityFilter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
            focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -102,136 +99,145 @@
 
     <!-- ✅ Common filtered task list -->
     <ng-container *ngIf="filteredTasks.length > 0; else noTaskFound">
-        <div *ngIf="selectedTab === 'Today'">
-            <div *ngFor="let task of filteredTasks; let i = index" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
+
+        <div cdkDropList (cdkDropListDropped)="drop($event)">
+
+
+            <div *ngIf="selectedTab === 'Today'">
+                <div *ngFor="let task of filteredTasks; let i = index" cdkDrag class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
          border-b border-gray-200 rounded-t-lg hover:bg-gray-100 hover:text-blue-700 
          dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white 
          dark:focus:ring-gray-500 dark:focus:text-white">
 
-                <!-- Left -->
-                <div class="flex items-center gap-5">
-                    <input type="checkbox" [(ngModel)]="task.completed" (change)="toggleComplete(task)"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500" />
-                    <p class="text-sm text-gray-700 dark:text-gray-200 font-medium"
-                        [ngClass]="{'line-through text-gray-400': task.completed}">
-                        {{ task.name }}
-                    </p>
-                </div>
+                    <!-- Left -->
+                    <div class="flex items-center gap-5">
+                        <input type="checkbox" [(ngModel)]="task.completed" (change)="toggleComplete(task)"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500" />
+                        <span class="cursor-move">🔀</span>
 
-                <!-- Date -->
-                <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
-                    📅 {{ task.date }}
-                </div>
+                        <p class="text-sm text-gray-700 dark:text-gray-200 font-medium"
+                            [ngClass]="{'line-through text-gray-400': task.completed}">
+                            {{ task.name }}
+                        </p>
+                    </div>
 
-                <!-- Actions -->
-                <div class="flex gap-2">
+                    <!-- Date -->
+                    <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
+                        📅 {{ task.date }}
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="flex gap-2">
 
 
-                    <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
-                    <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
+                        <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
+                        <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- 🟡 Pending Tab -->
-        <div *ngIf="selectedTab === 'Pending'">
-            <div *ngFor="let task of filteredTasks; let i = index" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
+            <!-- 🟡 Pending Tab -->
+            <div *ngIf="selectedTab === 'Pending'">
+                <div *ngFor="let task of filteredTasks; let i = index" cdkDrag class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
                      border-b border-gray-200 hover:bg-gray-100 dark:border-gray-600">
-                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-4">
 
+                        <span class="cursor-move">🔀</span>
 
-                    <p class="font-semibold text-red-700 dark:text-red-400">{{ task.name }}</p>
-                    <span [ngClass]="getPriorityClass(task.priority)" class="text-xs px-2 py-1 rounded w-fit ">
-                        {{ task.priority }}
-                    </span>
+                        <p class="font-semibold text-red-700 dark:text-red-400">{{ task.name }}</p>
+                        <span [ngClass]="getPriorityClass(task.priority)" class="text-xs px-2 py-1 rounded w-fit ">
+                            {{ task.priority }}
+                        </span>
 
-                </div>
-                <!-- Date -->
-                <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
-                    📅 {{ task.date }}
-                </div>
-                <div class="flex gap-2">
-                    <!-- ✅ Mark as Completed -->
-                    <button (click)="toggleComplete(task)"
-                        class="px-3 py-1 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700">
-                        ✅ Complete
-                    </button>
-                    <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
-                    <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
+                    </div>
+                    <!-- Date -->
+                    <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
+                        📅 {{ task.date }}
+                    </div>
+                    <div class="flex gap-2">
+                        <!-- ✅ Mark as Completed -->
+                        <button (click)="toggleComplete(task)"
+                            class="px-3 py-1 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700">
+                            ✅ Complete
+                        </button>
+                        <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
+                        <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
 
-        <!-- 🔴 Overdue Tab -->
-        <div *ngIf="selectedTab === 'Overdue'">
-            <div *ngFor="let task of filteredTasks; let i = index" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
+            <!-- 🔴 Overdue Tab -->
+            <div *ngIf="selectedTab === 'Overdue'">
+                <div *ngFor="let task of filteredTasks; let i = index" cdkDrag class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
                      border-b border-gray-200 hover:bg-gray-100 dark:border-gray-600">
-                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-4">
+                        <span class="cursor-move">🔀</span>
 
 
-                    <p class="font-semibold text-red-700 dark:text-red-400">{{ task.name }}</p>
-                    <span [ngClass]="getPriorityClass(task.priority)" class="text-xs px-2 py-1 rounded w-fit ">
-                        {{ task.priority }}
-                    </span>
+                        <p class="font-semibold text-red-700 dark:text-red-400">{{ task.name }}</p>
+                        <span [ngClass]="getPriorityClass(task.priority)" class="text-xs px-2 py-1 rounded w-fit ">
+                            {{ task.priority }}
+                        </span>
 
-                </div>
-                <!-- Date -->
-                <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
-                    📅 {{ task.date }}
-                </div>
-                <div class="flex gap-2">
-                    <!-- ✅ Mark as Completed -->
-                    <button (click)="toggleComplete(task)"
-                        class="px-3 py-1 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700">
-                        ✅ Complete
-                    </button>
-                    <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
-                    <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
+                    </div>
+                    <!-- Date -->
+                    <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
+                        📅 {{ task.date }}
+                    </div>
+                    <div class="flex gap-2">
+                        <!-- ✅ Mark as Completed -->
+                        <button (click)="toggleComplete(task)"
+                            class="px-3 py-1 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700">
+                            ✅ Complete
+                        </button>
+                        <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
+                        <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!--  Completed Tab -->
-        <div *ngIf="selectedTab === 'Completed'">
-            <div *ngFor="let task of filteredTasks; let i = index" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
+            <!--  Completed Tab -->
+            <div *ngIf="selectedTab === 'Completed'">
+                <div *ngFor="let task of filteredTasks; let i = index" cdkDrag class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
                                      border-b border-gray-200 hover:bg-gray-100 dark:border-gray-600">
-                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-4">
 
+                        <span class="cursor-move">🔀</span>
 
-                    <p class="font-semibold text-red-700 dark:text-red-400">{{ task.name }}</p>
-                    <span [ngClass]="getPriorityClass(task.priority)" class="text-xs px-2 py-1 rounded w-fit ">
-                        {{ task.priority }}
-                    </span>
+                        <p class="font-semibold text-red-700 dark:text-red-400">{{ task.name }}</p>
+                        <span [ngClass]="getPriorityClass(task.priority)" class="text-xs px-2 py-1 rounded w-fit ">
+                            {{ task.priority }}
+                        </span>
 
-                </div>
-                <!-- Date -->
-                <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
-                    📅 {{ task.date }}
-                </div>
-                <div class="flex gap-2">
-                    <!-- ↩️ Undo button -->
-                    <button (click)="toggleComplete(task)"
-                        class="px-3 py-1 text-sm bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-all">
-                        ↩️ Undo
-                    </button>
-                    <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
-                    <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
+                    </div>
+                    <!-- Date -->
+                    <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
+                        📅 {{ task.date }}
+                    </div>
+                    <div class="flex gap-2">
+                        <!-- ↩️ Undo button -->
+                        <button (click)="toggleComplete(task)"
+                            class="px-3 py-1 text-sm bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-all">
+                            ↩️ Undo
+                        </button>
+                        <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
+                        <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
 
+                    </div>
                 </div>
             </div>
+            <!-- Pagination (optional, same as before) -->
+            <nav aria-label="Page navigation example" class="mt-6">
+                <ul class="inline-flex -space-x-px text-base h-10">
+                    <li><a href="#" class="page-btn">Previous</a></li>
+                    <li><a href="#" class="page-btn">1</a></li>
+                    <li><a href="#" class="page-btn">2</a></li>
+                    <li><a href="#" class="page-btn active">3</a></li>
+                    <li><a href="#" class="page-btn">Next</a></li>
+                </ul>
+            </nav>
         </div>
-        <!-- Pagination (optional, same as before) -->
-        <nav aria-label="Page navigation example" class="mt-6">
-            <ul class="inline-flex -space-x-px text-base h-10">
-                <li><a href="#" class="page-btn">Previous</a></li>
-                <li><a href="#" class="page-btn">1</a></li>
-                <li><a href="#" class="page-btn">2</a></li>
-                <li><a href="#" class="page-btn active">3</a></li>
-                <li><a href="#" class="page-btn">Next</a></li>
-            </ul>
-        </nav>
-
 
     </ng-container>
 
