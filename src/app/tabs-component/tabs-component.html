@@ -55,16 +55,27 @@
         </svg>Search
     </button>
 </form>
-<!-- ✅ Priority Filter Dropdown -->
-<div class="flex justify-end mb-3">
-    <select [(ngModel)]="priorityFilter" (change)="updateFilteredTasks()"
-        class="border px-3 py-2 rounded-lg text-sm focus:ring focus:ring-green-300">
+<form class="max-w-sm mx-auto mb-3">
+    <label for="priority" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        Filter by Priority
+    </label>
+
+    <select id="priority" 
+    [(ngModel)]="priorityFilter" 
+    (change)="updateFilteredTasks()" 
+    name="priorityFilter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+           focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+           dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+           dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
         <option value="All">🎯 All Priorities</option>
         <option value="High">🔴 High</option>
         <option value="Medium">🟡 Medium</option>
         <option value="Low">🟢 Low</option>
+
     </select>
-</div>
+</form>
+
 
 <div class="flex items-center justify-between mt-4 mb-0">
     <p class="text-xl text-gray-900 dark:text-white">Tasks</p>
@@ -133,7 +144,7 @@
                     <span [ngClass]="getPriorityClass(task.priority)" class="text-xs px-2 py-1 rounded w-fit ">
                         {{ task.priority }}
                     </span>
- 
+
                 </div>
                 <!-- Date -->
                 <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
@@ -163,7 +174,7 @@
                     <span [ngClass]="getPriorityClass(task.priority)" class="text-xs px-2 py-1 rounded w-fit ">
                         {{ task.priority }}
                     </span>
- 
+
                 </div>
                 <!-- Date -->
                 <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
@@ -192,7 +203,7 @@
                     <span [ngClass]="getPriorityClass(task.priority)" class="text-xs px-2 py-1 rounded w-fit ">
                         {{ task.priority }}
                     </span>
- 
+
                 </div>
                 <!-- Date -->
                 <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
