@@ -73,6 +73,21 @@
     </select>
 </form>
 
+<div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm mb-4">
+
+    <!-- Text Progress -->
+    <p class="text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+        ✅ Completed {{ completedTasks }} out of {{ totalTasks }} tasks ({{ progressPercentage }}%)
+    </p>
+
+    <!-- Progress Bar -->
+    <div class="w-full bg-gray-200 rounded-full h-3 dark:bg-gray-700">
+        <div class="bg-green-500 h-3 rounded-full transition-all duration-500" [style.width]="progressPercentage + '%'">
+        </div>
+    </div>
+
+</div>
+
 
 <div class="flex items-center justify-between mt-4 mb-0">
     <p class="text-xl text-gray-900 dark:text-white">Tasks</p>

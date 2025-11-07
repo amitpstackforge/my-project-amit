@@ -221,6 +221,19 @@ export class TabsComponent {
     // this.markTaskCompleted(task);
   }
 
+  get totalTasks() {
+    return this.tasks.length;
+  }
+
+  get completedTasks() {
+    return this.tasks.filter(t => t.completed).length;
+  }
+
+  get progressPercentage() {
+    return this.totalTasks > 0 ? Math.round((this.completedTasks / this.totalTasks) * 100) : 0;
+  }
+
+
   updateFilteredTasks() {
     const today = new Date().toDateString();
 
@@ -250,7 +263,7 @@ export class TabsComponent {
     // ✅ Apply Search Filter
     this.filteredTasks = this.filterTasksBySearch(tasksBasedOnTab);
   }
-
+  
   showToastMessage(message: string) {
     this.toastMessage = message;
     this.showToast = true;
