@@ -119,6 +119,7 @@
 
 
             <div *ngIf="selectedTab === 'Today'">
+
                 <div *ngFor="let task of filteredTasks; let i = index" cdkDrag class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium 
          border-b border-gray-200 rounded-t-lg hover:bg-gray-100 hover:text-blue-700 
          dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white 
@@ -144,6 +145,18 @@
 
                     <!-- Actions -->
                     <div class="flex gap-2">
+                        <!-- ✅ Subtasks Section -->
+                        <div *ngIf="task.subtasks?.length" class="ml-6 mt-2 border-l pl-3">
+                            <div *ngFor="let sub of task.subtasks; let i = index"
+                                class="flex items-center gap-2 text-sm text-gray-700">
+
+                                <input type="checkbox" [(ngModel)]="sub.done" (change)="checkParentTaskCompletion(task)"
+                                    class="w-4 h-4">
+
+                                <span [class.line-through]="sub.done">{{ sub.title }}</span>
+
+                            </div>
+                        </div>
 
 
                         <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
@@ -169,13 +182,27 @@
                     <!-- Date -->
                     <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
                         📅 {{ formatDueDateTime(task) }}
-                    </div>
+                    </div><!-- ✅ Category Tag -->
+                    <span class="text-xs px-2 py-1 rounded-full font-medium mr-2"
+                        [ngClass]="getCategoryClass(task.category)">
+                        {{ getCategoryTag(task.category) }}
+                    </span>
                     <div class="flex gap-2">
                         <!-- ✅ Mark as Completed -->
                         <button (click)="toggleComplete(task)"
                             class="px-3 py-1 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700">
                             ✅ Complete
                         </button>
+                            <!-- ✅ Subtasks Section -->
+                            <div *ngIf="task.subtasks?.length" class="ml-6 mt-2 border-l pl-3">
+                                <div *ngFor="let sub of task.subtasks; let i = index" class="flex items-center gap-2 text-sm text-gray-700">
+                            
+                                    <input type="checkbox" [(ngModel)]="sub.done" (change)="checkParentTaskCompletion(task)" class="w-4 h-4">
+                            
+                                    <span [class.line-through]="sub.done">{{ sub.title }}</span>
+                            
+                                </div>
+                            </div>
                         <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
                         <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
                     </div>
@@ -201,12 +228,27 @@
                     <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
                         📅 {{ formatDueDateTime(task) }}
                     </div>
+                    <!-- ✅ Category Tag -->
+                    <span class="text-xs px-2 py-1 rounded-full font-medium mr-2"
+                        [ngClass]="getCategoryClass(task.category)">
+                        {{ getCategoryTag(task.category) }}
+                    </span>
                     <div class="flex gap-2">
                         <!-- ✅ Mark as Completed -->
                         <button (click)="toggleComplete(task)"
                             class="px-3 py-1 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700">
                             ✅ Complete
                         </button>
+                            <!-- ✅ Subtasks Section -->
+                            <div *ngIf="task.subtasks?.length" class="ml-6 mt-2 border-l pl-3">
+                                <div *ngFor="let sub of task.subtasks; let i = index" class="flex items-center gap-2 text-sm text-gray-700">
+                            
+                                    <input type="checkbox" [(ngModel)]="sub.done" (change)="checkParentTaskCompletion(task)" class="w-4 h-4">
+                            
+                                    <span [class.line-through]="sub.done">{{ sub.title }}</span>
+                            
+                                </div>
+                            </div>
                         <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
                         <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
                     </div>
@@ -231,12 +273,28 @@
                     <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
                         📅 {{ formatDueDateTime(task) }}
                     </div>
+                    <!-- ✅ Category Tag -->
+                    <span class="text-xs px-2 py-1 rounded-full font-medium mr-2"
+                        [ngClass]="getCategoryClass(task.category)">
+                        {{ getCategoryTag(task.category) }}
+                    </span>
+
                     <div class="flex gap-2">
                         <!-- ↩️ Undo button -->
                         <button (click)="toggleComplete(task)"
                             class="px-3 py-1 text-sm bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-all">
                             ↩️ Undo
                         </button>
+                            <!-- ✅ Subtasks Section -->
+                            <div *ngIf="task.subtasks?.length" class="ml-6 mt-2 border-l pl-3">
+                                <div *ngFor="let sub of task.subtasks; let i = index" class="flex items-center gap-2 text-sm text-gray-700">
+                            
+                                    <input type="checkbox" [(ngModel)]="sub.done" (change)="checkParentTaskCompletion(task)" class="w-4 h-4">
+                            
+                                    <span [class.line-through]="sub.done">{{ sub.title }}</span>
+                            
+                                </div>
+                            </div>
                         <button (click)="onEditTask(i)" class="btn-icon">✏️</button>
                         <button (click)="onDeleteTask(i)" class="btn-icon">🗑️</button>
 

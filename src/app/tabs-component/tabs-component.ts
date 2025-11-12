@@ -25,34 +25,211 @@ export class TabsComponent {
   // ✅ সব টাস্ক এখানে জমা হবে
   // ✅ All task list
   tasks: any[] = [
-    { id: 1, name: 'Buy groceries', price: 500, category: 'PH', description: 'Milk, eggs, bread', date: '2025-11-06', priority: 'High', completed: false, dueTime: '18:22' },
-    { id: 2, name: 'Morning workout', price: 0, category: 'GA', description: '1-hour cardio session', date: '2025-11-06', priority: 'Medium', completed: true, dueTime: '06:45' },
-    { id: 3, name: 'Pay electricity bill', price: 1200, category: 'PC', description: 'Pay online via app', date: '2025-11-06', priority: 'High', completed: false, dueTime: '20:10' },
-    { id: 4, name: 'Client meeting call', price: 0, category: 'PC', description: 'Project discussion 3 PM', date: '2025-11-06', priority: 'High', completed: false, dueTime: '15:00' },
+    {
+      id: 1, name: 'Buy groceries', price: 500, category: 'Personal', description: 'Milk, eggs, bread', date: '2025-11-06', priority: 'High', completed: false, dueTime: '18:22',
+      subtasks: [
+        { title: 'Check fridge items', done: true },
+        { title: 'Buy essentials', done: false },
+        { title: 'Pay at counter', done: false }
+      ]
+    },
+    {
+      id: 2, name: 'Morning workout', price: 0, category: 'Health', description: '1-hour cardio session', date: '2025-11-06', priority: 'Medium', completed: true, dueTime: '06:45',
+      subtasks: [
+        { title: 'Warm up', done: true },
+        { title: 'Cardio', done: true },
+        { title: 'Stretching', done: true }
+      ]
+    },
+    {
+      id: 3, name: 'Pay electricity bill', price: 1200, category: 'Work', description: 'Pay online via app', date: '2025-11-06', priority: 'High', completed: false, dueTime: '20:10',
+      subtasks: [
+        { title: 'Open app', done: true },
+        { title: 'Enter amount', done: false },
+        { title: 'Confirm payment', done: false }
+      ]
+    },
+    {
+      id: 4, name: 'Client meeting call', price: 0, category: 'Work', description: 'Project discussion 3 PM', date: '2025-11-06', priority: 'High', completed: false, dueTime: '15:00',
+      subtasks: [
+        { title: 'Prepare meeting notes', done: true },
+        { title: 'Join call', done: false },
+        { title: 'Share report', done: false }
+      ]
+    },
+    {
+      id: 5, name: 'Dentist appointment', price: 0, category: 'Personal', description: 'Checkup at 5 PM', date: '2025-11-08', priority: 'Medium', completed: false, dueTime: '17:12',
+      subtasks: [
+        { title: 'Reach clinic', done: false },
+        { title: 'Consult doctor', done: false },
+        { title: 'Buy medicine', done: false }
+      ]
+    },
+    {
+      id: 6, name: 'Team lunch', price: 1000, category: 'Health', description: 'Office lunch', date: '2025-11-07', priority: 'Low', completed: false, dueTime: '13:25',
+      subtasks: [
+        { title: 'Choose restaurant', done: true },
+        { title: 'Order food', done: false },
+        { title: 'Split bill', done: false }
+      ]
+    },
+    {
+      id: 7, name: 'Start React course', price: 0, category: 'Work', description: 'Online tutorial', date: '2025-11-10', priority: 'High', completed: false, dueTime: '10:40',
+      subtasks: [
+        { title: 'Watch intro', done: true },
+        { title: 'Practice topic', done: false },
+        { title: 'Take notes', done: false }
+      ]
+    },
+    {
+      id: 8, name: 'Book train tickets', price: 800, category: 'Work', description: 'Trip to Kolkata', date: '2025-11-12', priority: 'Medium', completed: false, dueTime: '21:05',
+      subtasks: [
+        { title: 'Check availability', done: true },
+        { title: 'Fill details', done: false },
+        { title: 'Make payment', done: false }
+      ]
+    },
+    {
+      id: 9, name: 'Buy Diwali gifts', price: 2000, category: 'Personal', description: 'For family', date: '2025-11-09', priority: 'High', completed: false, dueTime: '19:30',
+      subtasks: [
+        { title: 'Select gifts', done: true },
+        { title: 'Pack gifts', done: false },
+        { title: 'Send to home', done: false }
+      ]
+    },
+    {
+      id: 10, name: 'Read novel book', price: 0, category: 'Health', description: 'Spend 30 mins', date: '2025-11-10', priority: 'Low', completed: false, dueTime: '16:50',
+      subtasks: [
+        { title: 'Choose chapter', done: true },
+        { title: 'Read 20 pages', done: false },
+        { title: 'Write summary', done: false }
+      ]
+    },
+    {
+      id: 11, name: 'Call the doctor', price: 0, category: 'Personal', description: 'Appointment at 10 AM', date: '2025-11-03', priority: 'High', completed: false, dueTime: '10:05',
+      subtasks: [
+        { title: 'Dial number', done: true },
+        { title: 'Book time', done: true },
+        { title: 'Note schedule', done: false }
+      ]
+    },
+    {
+      id: 12, name: 'Pay credit card bill', price: 2500, category: 'Work', description: 'Due last week', date: '2025-10-28', priority: 'High', completed: false, dueTime: '14:18',
+      subtasks: [
+        { title: 'Login to bank', done: true },
+        { title: 'Enter amount', done: false },
+        { title: 'Verify OTP', done: false }
+      ]
+    },
+    {
+      id: 13, name: 'Submit tax documents', price: 0, category: 'Work', description: 'IT return form', date: '2025-10-31', priority: 'Medium', completed: true, dueTime: '11:30',
+      subtasks: [
+        { title: 'Fill form', done: true },
+        { title: 'Upload docs', done: true },
+        { title: 'Submit', done: true }
+      ]
+    },
+    {
+      id: 14, name: 'Laundry pickup', price: 300, category: 'Personal', description: 'Dry cleaning', date: '2025-11-02', priority: 'Low', completed: false, dueTime: '09:50',
+      subtasks: [
+        { title: 'Call laundry', done: true },
+        { title: 'Pack clothes', done: false },
+        { title: 'Hand over', done: false }
+      ]
+    },
+    {
+      id: 15, name: 'Car service', price: 1500, category: 'Personal', description: 'Engine check', date: '2025-10-30', priority: 'Medium', completed: false, dueTime: '08:20',
+      subtasks: [
+        { title: 'Reach showroom', done: true },
+        { title: 'Explain issue', done: false },
+        { title: 'Collect car', done: false }
+      ]
+    },
 
-    { id: 5, name: 'Dentist appointment', price: 0, category: 'PH', description: 'Checkup at 5 PM', date: '2025-11-08', priority: 'Medium', completed: false, dueTime: '17:12' },
-    { id: 6, name: 'Team lunch', price: 1000, category: 'GA', description: 'Office lunch', date: '2025-11-07', priority: 'Low', completed: false, dueTime: '13:25' },
-    { id: 7, name: 'Start React course', price: 0, category: 'PC', description: 'Online tutorial', date: '2025-11-10', priority: 'High', completed: false, dueTime: '10:40' },
-    { id: 8, name: 'Book train tickets', price: 800, category: 'PC', description: 'Trip to Kolkata', date: '2025-11-12', priority: 'Medium', completed: false, dueTime: '21:05' },
-    { id: 9, name: 'Buy Diwali gifts', price: 2000, category: 'PH', description: 'For family', date: '2025-11-09', priority: 'High', completed: false, dueTime: '19:30' },
-    { id: 10, name: 'Read novel book', price: 0, category: 'GA', description: 'Spend 30 mins', date: '2025-11-10', priority: 'Low', completed: false, dueTime: '16:50' },
-
-    { id: 11, name: 'Call the doctor', price: 0, category: 'PH', description: 'Appointment at 10 AM', date: '2025-11-03', priority: 'High', completed: false, dueTime: '10:05' },
-    { id: 12, name: 'Pay credit card bill', price: 2500, category: 'PC', description: 'Due last week', date: '2025-10-28', priority: 'High', completed: false, dueTime: '14:18' },
-    { id: 13, name: 'Submit tax documents', price: 0, category: 'PC', description: 'IT return form', date: '2025-10-31', priority: 'Medium', completed: true, dueTime: '11:30' },
-    { id: 14, name: 'Laundry pickup', price: 300, category: 'PH', description: 'Dry cleaning', date: '2025-11-02', priority: 'Low', completed: false, dueTime: '09:50' },
-    { id: 15, name: 'Car service', price: 1500, category: 'PH', description: 'Engine check', date: '2025-10-30', priority: 'Medium', completed: false, dueTime: '08:20' },
-
-    { id: 16, name: 'Grocery restock', price: 700, category: 'PH', description: 'Buy rice, pulses', date: '2025-11-06', priority: 'Medium', completed: false, dueTime: '19:45' },
-    { id: 17, name: 'Yoga session', price: 0, category: 'GA', description: 'Morning meditation', date: '2025-11-06', priority: 'Low', completed: false, dueTime: '07:10' },
-    { id: 18, name: 'Update LinkedIn profile', price: 0, category: 'PC', description: 'Add project details', date: '2025-11-11', priority: 'Medium', completed: false, dueTime: '12:30' },
-    { id: 19, name: 'Water plants', price: 0, category: 'GA', description: 'Daily routine', date: '2025-11-06', priority: 'Low', completed: true, dueTime: '08:05' },
-    { id: 20, name: 'Laptop backup', price: 0, category: 'PC', description: 'Use Google Drive', date: '2025-10-25', priority: 'High', completed: false, dueTime: '22:15' },
-    { id: 21, name: 'Monthly expense report', price: 0, category: 'PC', description: 'Update Excel tracker', date: '2025-11-01', priority: 'Medium', completed: false, dueTime: '17:40' },
-    { id: 22, name: 'Order computer mouse', price: 600, category: 'PC', description: 'Logitech wireless', date: '2025-11-06', priority: 'Low', completed: false, dueTime: '14:55' },
-    { id: 23, name: 'Weekend trip plan', price: 0, category: 'GA', description: 'Location research', date: '2025-11-09', priority: 'Low', completed: false, dueTime: '18:30' },
-    { id: 24, name: 'Clean room', price: 0, category: 'PH', description: 'Morning cleanup', date: '2025-11-06', priority: 'Medium', completed: false, dueTime: '09:00' }
+    {
+      id: 16, name: 'Grocery restock', price: 700, category: 'Personal', description: 'Buy rice, pulses', date: '2025-11-06', priority: 'Medium', completed: false, dueTime: '19:45',
+      subtasks: [
+        { title: 'Check stock', done: true },
+        { title: 'Make list', done: true },
+        { title: 'Purchase items', done: false }
+      ]
+    },
+    {
+      id: 17, name: 'YoHealth session', price: 0, category: 'Health', description: 'Morning meditation', date: '2025-11-06', priority: 'Low', completed: false, dueTime: '07:10',
+      subtasks: [
+        { title: 'Start music', done: true },
+        { title: 'Meditate', done: false },
+        { title: 'Drink water', done: false }
+      ]
+    },
+    {
+      id: 18, name: 'Update LinkedIn profile', price: 0, category: 'Work', description: 'Add project details', date: '2025-11-11', priority: 'Medium', completed: false, dueTime: '12:30',
+      subtasks: [
+        { title: 'Update headline', done: true },
+        { title: 'Add projects', done: false },
+        { title: 'Post update', done: false }
+      ]
+    },
+    {
+      id: 19, name: 'Water plants', price: 0, category: 'Health', description: 'Daily routine', date: '2025-11-06', priority: 'Low', completed: true, dueTime: '08:05',
+      subtasks: [
+        { title: 'Fill water', done: true },
+        { title: 'Water plants', done: true },
+        { title: 'Clean area', done: true }
+      ]
+    },
+    {
+      id: 20, name: 'Laptop backup', price: 0, category: 'Work', description: 'Use Google Drive', date: '2025-10-25', priority: 'High', completed: false, dueTime: '22:15',
+      subtasks: [
+        { title: 'Open drive', done: true },
+        { title: 'Upload files', done: false },
+        { title: 'Verify upload', done: false }
+      ]
+    },
+    {
+      id: 21, name: 'Monthly expense report', price: 0, category: 'Work', description: 'Update Excel tracker', date: '2025-11-01', priority: 'Medium', completed: false, dueTime: '17:40',
+      subtasks: [
+        { title: 'Open sheet', done: true },
+        { title: 'Update data', done: false },
+        { title: 'Save & send', done: false }
+      ]
+    },
+    {
+      id: 22, name: 'Order computer mouse', price: 600, category: 'Work', description: 'Logitech wireless', date: '2025-11-06', priority: 'Low', completed: false, dueTime: '14:55',
+      subtasks: [
+        { title: 'Search online', done: true },
+        { title: 'Add to cart', done: true },
+        { title: 'Place order', done: false }
+      ]
+    },
+    {
+      id: 23, name: 'Weekend trip plan', price: 0, category: 'Health', description: 'Location research', date: '2025-11-09', priority: 'Low', completed: false, dueTime: '18:30',
+      subtasks: [
+        { title: 'Shortlist places', done: false },
+        { title: 'Check budget', done: false },
+        { title: 'Finalize plan', done: false }
+      ]
+    },
+    {
+      id: 24, name: 'Clean room', price: 0, category: 'Personal', description: 'Morning cleanup', date: '2025-11-06', priority: 'Medium', completed: false, dueTime: '09:00',
+      subtasks: [
+        { title: 'Tidy bed', done: true },
+        { title: 'Sweep floor', done: false },
+        { title: 'Arrange desk', done: false }
+      ]
+    },
+    {
+      id: 25, name: 'Prepare Presentation', price: 0, category: 'Work', description: 'Office presentation', date: '2025-11-07', priority: 'High', completed: false, dueTime: '11:30',
+      subtasks: [
+        { title: 'Create slides', done: false },
+        { title: 'Add charts', done: false },
+        { title: 'Review content', done: true }
+      ]
+    }
   ];
+
+
+
   formatDueDateTime(task: any): string {
     const date = new Date(task.date);
     const options: Intl.DateTimeFormatOptions = {
@@ -98,7 +275,9 @@ export class TabsComponent {
       price: [null, [Validators.required, Validators.min(1)]],
       category: ['', Validators.required],
       description: ['', Validators.required],
-      date: [''] // ✅ Date picker field added here
+      date: [''],// ✅ Date picker field added here
+      subtasks: [[]]   // ✅ new field
+
     });
     this.updateFilteredTasks(); // ✅ initialize
   }
@@ -354,4 +533,35 @@ export class TabsComponent {
 
 
   }
+
+
+  getCategoryTag(category: string) {
+    const map: any = {
+      'Personal': '🏠 Personal',
+      'Work': '💼 Work',
+      'Health': '💊 Health'
+    };
+    return map[category] || category;
+  }
+
+  getCategoryClass(category: string) {
+    return {
+      'bg-blue-100 text-blue-800': category === 'Personal',
+      'bg-purple-100 text-purple-800': category === 'Work',
+      'bg-green-100 text-green-800': category === 'Health'
+    };
+  }
+  checkParentTaskCompletion(task: any) {
+    if (!task.subtasks) return;
+
+    // ✅ If all subtasks are done → parent task complete
+    task.completed = task.subtasks.every((sub: any) => sub.done);
+
+    this.updateFilteredTasks();
+  }
+
+
+
 }
+
+
