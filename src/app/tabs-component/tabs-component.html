@@ -138,7 +138,8 @@
 
                     <!-- Date -->
                     <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
-                        📅 {{ task.date }}
+                        📅 {{ formatDueDateTime(task) }}
+
                     </div>
 
                     <!-- Actions -->
@@ -167,7 +168,7 @@
                     </div>
                     <!-- Date -->
                     <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
-                        📅 {{ task.date }}
+                        📅 {{ formatDueDateTime(task) }}
                     </div>
                     <div class="flex gap-2">
                         <!-- ✅ Mark as Completed -->
@@ -198,7 +199,7 @@
                     </div>
                     <!-- Date -->
                     <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
-                        📅 {{ task.date }}
+                        📅 {{ formatDueDateTime(task) }}
                     </div>
                     <div class="flex gap-2">
                         <!-- ✅ Mark as Completed -->
@@ -228,7 +229,7 @@
                     </div>
                     <!-- Date -->
                     <div class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
-                        📅 {{ task.date }}
+                        📅 {{ formatDueDateTime(task) }}
                     </div>
                     <div class="flex gap-2">
                         <!-- ↩️ Undo button -->
