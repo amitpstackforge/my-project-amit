@@ -1,13 +1,15 @@
 <div class="text-sm font-medium text-center text-body border-b border-default">
     <ul class="flex flex-wrap -mb-px">
 
-        <li class="me-2">
+        <li
+            class="me-2 inline-block p-4 border-b border-transparent rounded-t-base hover:text-fg-brand hover:border-brand">
             <button (click)="activeTab = 'customer'" [ngClass]="activeTab === 'customer' 
                       ? 'inline-block p-4 text-fg-brand border-b-2 border-brand rounded-t-base' 
                       : 'inline-block p-4 border-b-2 border-transparent hover:text-fg-brand hover:border-brand'">
                 Customer
             </button>
-        <li class="me-2">
+        <li
+            class="me-2 inline-block p-4 border-b border-transparent rounded-t-base hover:text-fg-brand hover:border-brand">
             <button (click)="activeTab = 'suppliers'" [ngClass]="activeTab === 'suppliers' 
                       ? 'inline-block p-4 text-fg-brand border-b-2 border-brand rounded-t-base' 
                       : 'inline-block p-4 border-b-2 border-transparent hover:text-fg-brand hover:border-brand'">
@@ -18,10 +20,189 @@
 
     </ul>
 
-    <div class="mt-6">
+    <div class="">
 
         <div *ngIf="activeTab === 'customer'">
             <p class="text-lg">Customer Content Loaded...</p>
+            <ul class="max-w-md divide-y divide-default">
+
+
+                <div class="flex items-center gap-4 w-full">
+                    <form class="flex items-center  space-x-2">
+                        <label for="simple-search" class="sr-only">Search</label>
+                        <div class="relative w-full">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M8 8v8m0-8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8-8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0a4 4 0 0 1-4 4h-1a3 3 0 0 0-3 3" />
+                                </svg>
+                            </div>
+                            <input type="text" id="simple-search"
+                                class="px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium rounded-base ps-9 text-heading text-sm focus:ring-brand focus:border-brand block w-full placeholder:text-body"
+                                placeholder="Search Customer name..." required />
+                        </div>
+                        <button type="submit"
+                            class="inline-flex items-center justify-center shrink-0 text-white bg-brand hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs rounded-base w-10 h-10 focus:outline-none">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                    d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                            </svg>
+                            <span class="sr-only">Icon description</span>
+                        </button>
+                    </form>
+                    <form class="flex items-center  space-x-2">
+                        <label for="simple-search" class="sr-only">Search</label>
+                        <div class="relative w-full">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M8 8v8m0-8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8-8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0a4 4 0 0 1-4 4h-1a3 3 0 0 0-3 3" />
+                                </svg>
+                            </div>
+                            <input type="text" id="simple-search"
+                                class="px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium rounded-base ps-9 text-heading text-sm focus:ring-brand focus:border-brand block w-full placeholder:text-body"
+                                placeholder="Search Suppliers name..." required />
+                        </div>
+                        <button type="submit"
+                            class="inline-flex items-center justify-center shrink-0 text-white bg-brand hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs rounded-base w-10 h-10 focus:outline-none">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                    d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                            </svg>
+                            <span class="sr-only">Icon description</span>
+                        </button>
+                    </form>
+                    <form class="">
+                        <label for="years" class="block mb-1.5 text-sm font-medium text-heading">Select an
+                            option</label>
+                        <select id="years" size="1"
+                            class="block w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 py-1.5 shadow-xs placeholder:text-body">
+                            <option><select name="" id=""></select></option>
+                            <option>2017</option>
+                            <option>2018</option>
+                            <option>2019</option>
+                            <option>2020</option>
+                            <option>2021</option>
+                            <option>2022</option>
+                        </select>
+                    </form>
+                </div>
+
+
+
+
+                <!-- Header -->
+                <li class="py-2">
+                    <div class="flex items-center justify-between text-sm font-semibold text-heading">
+                        <span>Photo</span>
+                        <span>Name</span>
+                        <span>Amount</span>
+                    </div>
+                </li>
+
+                <li class="pb-3 sm:pb-4">
+                    <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                        <div class="shrink-0">
+                            <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg"
+                                alt="Neil image">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-heading truncate">
+                                Neil Sims
+                            </p>
+                            <p class="text-sm text-body truncate">
+                                email@flowbite.com
+                            </p>
+                        </div>
+                        <div class="inline-flex items-center text-base font-semibold text-heading">
+                            $320
+                        </div>
+                    </div>
+                </li>
+                <li class="py-3 sm:py-4">
+                    <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                        <div class="shrink-0">
+                            <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg"
+                                alt="Neil image">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-heading truncate">
+                                Bonnie Green
+                            </p>
+                            <p class="text-sm text-body truncate">
+                                email@flowbite.com
+                            </p>
+                        </div>
+                        <div class="inline-flex items-center text-base font-semibold text-heading">
+                            $3467
+                        </div>
+                    </div>
+                </li>
+                <li class="py-3 sm:py-4">
+                    <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                        <div class="shrink-0">
+                            <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-2.jpg"
+                                alt="Neil image">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-heading truncate">
+                                Michael Gough
+                            </p>
+                            <p class="text-sm text-body truncate">
+                                email@flowbite.com
+                            </p>
+                        </div>
+                        <div class="inline-flex items-center text-base font-semibold text-heading">
+                            $67
+                        </div>
+                    </div>
+                </li>
+                <li class="py-3 sm:py-4">
+                    <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                        <div class="shrink-0">
+                            <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-5.jpg"
+                                alt="Neil image">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-heading truncate">
+                                Thomas Lean
+                            </p>
+                            <p class="text-sm text-body truncate">
+                                email@flowbite.com
+                            </p>
+                        </div>
+                        <div class="inline-flex items-center text-base font-semibold text-heading">
+                            $2367
+                        </div>
+                    </div>
+                </li>
+                <li class="pt-3 pb-0 sm:pt-4">
+                    <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                        <div class="shrink-0">
+                            <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-4.jpg"
+                                alt="Neil image">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-heading truncate">
+                                Lana Byrd
+                            </p>
+                            <p class="text-sm text-body truncate">
+                                email@flowbite.com
+                            </p>
+                        </div>
+                        <div class="inline-flex items-center text-base font-semibold text-heading">
+                            $367
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
         </div>
 
         <div *ngIf="activeTab === 'suppliers'">
