@@ -1,1 +1,33 @@
-<p>suppliers works!</p>
+<div class="text-sm font-medium text-center text-body border-b border-default">
+    <ul class="flex flex-wrap -mb-px">
+
+        <li class="me-2">
+            <button (click)="activeTab = 'customer'" [ngClass]="activeTab === 'customer' 
+                      ? 'inline-block p-4 text-fg-brand border-b-2 border-brand rounded-t-base' 
+                      : 'inline-block p-4 border-b-2 border-transparent hover:text-fg-brand hover:border-brand'">
+                Customer
+            </button>
+        <li class="me-2">
+            <button (click)="activeTab = 'suppliers'" [ngClass]="activeTab === 'suppliers' 
+                      ? 'inline-block p-4 text-fg-brand border-b-2 border-brand rounded-t-base' 
+                      : 'inline-block p-4 border-b-2 border-transparent hover:text-fg-brand hover:border-brand'">
+                Suppliers
+            </button>
+
+        </li>
+
+    </ul>
+
+    <div class="mt-6">
+
+        <div *ngIf="activeTab === 'customer'">
+            <p class="text-lg">Customer Content Loaded...</p>
+        </div>
+
+        <div *ngIf="activeTab === 'suppliers'">
+            <p class="text-lg">Suppliers Content Loaded...</p>
+        </div>
+
+    </div>
+
+</div>
